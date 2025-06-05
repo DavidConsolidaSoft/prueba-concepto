@@ -1,0 +1,488 @@
+@import "tailwindcss";
+
+:root {
+  /* Light mode colors - Propuesta con más contraste */
+  --background-primary: #F9F7F7;
+  --background-secondary: #DBE2EF; 
+  --background-tertiary: #3F72AF;  
+  --background-accent: #eef2ff;    
+  --background-input: #ffffff;    
+  --background-hover: #f3f4f6;    
+  
+  --text-primary: #1f2937;        
+  --text-secondary: #4b5563;      
+  --text-tertiary: #9ca3af;        
+  
+  --border-primary: #d1d5db;    
+  --border-secondary: #9ca3af;    
+  --border-tertiary: #6b7280;      
+  --border-focus: #3b82f6;        
+  
+  /* Colores de acento se mantienen, son buenos */
+  --accent-primary: #3b82f6;
+  --accent-primary-hover: #2563eb;
+  --accent-success: #10b981;
+  --accent-danger: #ef4444;
+  --accent-warning: #f59e0b;
+  
+  /* Sombras se mantienen, son buenas */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1); /* Sombra un poco más compleja */
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* Sombra un poco más compleja */
+  
+  --status-open: #10b981;
+  --status-closed: #6b7280;
+}
+
+.dark {
+  /* Dark mode colors */
+  --background-primary: #1f2937;
+  --background-secondary: #374151;
+  --background-tertiary: #4b5563;
+  --background-accent: #4b5563;
+  --background-input: #374151;
+  --background-hover: #4b5563;
+  
+  --text-primary: #f9fafb;
+  --text-secondary: #e5e7eb;
+  --text-tertiary: #9ca3af;
+  
+  --border-primary: #4b5563;
+  --border-secondary: #6b7280;
+  --border-tertiary: #9ca3af;
+  --border-focus: #60a5fa;
+  
+  --accent-primary: #60a5fa;
+  --accent-primary-hover: #3b82f6;
+  --accent-success: #34d399;
+  --accent-danger: #f87171;
+  --accent-warning: #fbbf24;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  
+  --status-open: #34d399;
+  --status-closed: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: var(--text-primary);
+  background-color: var(--background-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+/* Estilos mejorados para los inputs */
+input {
+  border-radius: 8px !important;
+  border: 1px solid var(--border-primary) !important;
+  outline: none !important;
+  background-color: var(--background-input);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+  padding: 0.5rem 0.75rem;
+}
+
+input:hover {
+  border-color: var(--border-secondary) !important;
+  background-color: var(--background-hover);
+}
+
+input:focus {
+  border-color: var(--border-focus) !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Placeholder text */
+input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Estilos mejorados para botones */
+button, .btn {
+  border-radius: 6px !important;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Botones primarios */
+.btn-primary {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-primary-hover);
+}
+
+/* Estilo para el enlace de olvidé contraseña */
+.forgot-link {
+  color: var(--accent-primary) !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.forgot-link:hover {
+  color: var(--accent-primary-hover) !important;
+  text-decoration: underline;
+}
+
+/* Separador con línea */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex-grow: 1;
+  height: 1px;
+  background-color: var(--border-primary);
+}
+
+.divider-text {
+  margin: 0 1rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* Tabs para filtros */
+.filter-button {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: transparent;
+  transition: all 0.2s ease;
+}
+
+.filter-button:hover {
+  background-color: var(--background-hover);
+  color: var(--text-primary);
+}
+
+.filter-button.active {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+/* Estados de factura */
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.status-open {
+  background-color: var(--status-open);
+  color: white;
+}
+
+.status-closed {
+  background-color: var(--status-closed);
+  color: white;
+}
+
+/* Tarjetas y paneles */
+.card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Panel lateral */
+.side-panel {
+  background-color: var(--background-secondary);
+  border-left: 1px solid var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Elementos de lista */
+.list-item {
+  padding: 1rem;
+  border-bottom: 1px solid var(--border-primary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.list-item:hover {
+  background-color: var(--background-hover);
+}
+
+.list-item.selected {
+  background-color: var(--background-accent);
+  border-left: 3px solid var(--accent-primary);
+}
+
+/* Encabezados de sección */
+.section-header {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+/* Etiquetas de formulario */
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+/* Valores de datos */
+.data-value {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.data-label {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  margin-bottom: 0.25rem;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  /* Utility classes for theming */
+  .bg-primary {
+    background-color: var(--background-primary);
+  }
+  
+  .bg-secondary {
+    background-color: var(--background-secondary);
+  }
+  
+  .bg-tertiary {
+    background-color: var(--background-tertiary);
+  }
+  
+  .bg-accent {
+    background-color: var(--background-accent);
+  }
+  
+  .text-primary {
+    color: var(--text-primary);
+  }
+  
+  .text-secondary {
+    color: var(--text-secondary);
+  }
+  
+  .text-tertiary {
+    color: var(--text-tertiary);
+  }
+  
+  .border-primary {
+    border-color: var(--border-primary);
+  }
+  
+  .border-secondary {
+    border-color: var(--border-secondary);
+  }
+  
+  .border-tertiary {
+    border-color: var(--border-tertiary);
+  }
+}
+
+/* Tema específico para elementos */
+.theme-card {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+}
+
+.theme-modal {
+  background-color: var(--background-primary);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Personalización del scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-tertiary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-primary);
+}
+
+/* Estilos responsivos adicionales para el selector de productos */
+.main-content, .detail-content {
+  transition: margin-right 0.3s ease;
+}
+
+.content-shifted {
+  margin-right: 24rem !important;
+}
+
+/* Animaciones para modales y transiciones */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.3s ease forwards;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.3s ease forwards;
+}
+
+/* Mejoras para la barra de navegación móvil */
+.bottom-nav {
+  background-color: var(--background-secondary);
+  border-top: 1px solid var(--border-primary);
+  box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Arreglos para vista móvil */
+@media (max-width: 768px) {
+  .product-selector-mobile {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background-color: var(--background-primary);
+    transition: transform 0.3s ease;
+  }
+  
+  .mobile-slide-in {
+    transform: translateX(0);
+  }
+  
+  .mobile-slide-out {
+    transform: translateX(100%);
+  }
+  
+  .bottom-nav-adjustment {
+    padding-bottom: 70px;
+  }
+}
+
+/* Panel selector de clientes */
+.client-selector-panel {
+  background-color: var(--background-secondary);
+  animation: fadeIn 0.3s ease forwards;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .client-selector-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background-color: var(--background-primary);
+    transition: transform 0.3s ease;
+  }
+}
+
+.content-shifted {
+  margin-right: 24rem !important;
+}
+
+.mobile-client-selector-panel {
+  background-color: var(--background-primary);
+  animation: fadeIn 0.3s ease forwards;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .mobile-client-selector-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    background-color: var(--background-primary);
+    transition: transform 0.3s ease;
+  }
+}
+
+/* Clases para los modales/alertas */
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.modal-content {
+  background-color: var(--background-secondary);
+  border: 1px solid var(--border-primary);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Override para los modales en dark mode */
+.dark .modal-content {
+  background-color: var(--background-secondary);
+  border-color: var(--border-primary);
+}
+
+
